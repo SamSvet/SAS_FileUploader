@@ -1,0 +1,57 @@
+.boCollapsible {
+    background: #f1f1f1;
+    border: 1px solid #ccc9c9;
+    border-radius: 2px;
+}
+.boCollapsible .title {
+    padding: 1rem;
+    border-bottom: 1px solid #eaeaea;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+}
+.boCollapsible .title i {
+    margin-right: 1rem;
+    transition: all ease-in-out 0.5s;
+}
+.boCollapsible .title i.open {
+    transform: rotate(90deg);
+}
+.boCollapsible svg {
+    margin-right: 1rem;
+}
+.boCollapsible .content {
+    font-size: 12px;
+    height: 0;
+    visibility: hidden;
+    background: #ffffff;
+}
+.boCollapsible .content.open {
+    height: auto;
+    visibility: visible;
+    padding: 1rem;
+}
+
+.plus rect{
+    transition: all 800ms;
+    transform: scaleY(1);
+    transform-origin: 50% 50%;
+}
+
+.plus.minus .vertical-line{
+    transform: scaleY(0);
+}
+
+
+.export-btn{
+    background: #fafafa;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eaeaea;
+}
+.export-icon{
+    opacity: 0.5;
+}
+
+.export-btn:hover .export-icon{
+    opacity: 1;
+}

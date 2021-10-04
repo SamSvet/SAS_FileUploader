@@ -1,0 +1,23 @@
+@keyframes check {
+    0% {
+      transform: translateX(0);
+    }
+  
+    30% {
+      opacity: .7;
+      transform: translateX(30px);
+    }
+  
+    100% {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+  }
+  
+  .check-exit-active {
+    animation: check 700ms ease-out forwards;
+  }
+  
+  .check-enter-active {
+    animation: check 700ms ease-in alternate-reverse;
+  }

@@ -1,0 +1,80 @@
+/*.btn-ripple {
+    position: relative;
+
+    display: block;
+    margin: 30px auto;
+    padding: 0;
+
+    overflow: hidden;
+
+    border-width: 0;
+    border: 1px solid transparent;
+    outline: none;
+    border-radius: 2px;
+    border-color: #212529;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+    background-color: #2ecc71;
+    color: #ecf0f1;
+
+    transition: background-color .3s;
+}
+
+.btn:hover, .btn:focus {
+    background-color: #27ae60;
+}*/
+
+
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+/*.btn-ripple > * {
+    position: relative;
+}
+*/
+
+/*.btn-ripple span {
+    display: block;
+    padding: 12px 24px;
+    animation: animate 1s linear infinite;
+}*/
+
+.btn-ripple > span{
+    display: inline-block;
+    position: absolute;
+    animation: animate 1s linear infinite;
+}
+
+.btn-ripple:before {
+    content: "";
+    position: absolute;
+    display: block;
+    /*width: 0;
+    padding-top: 0;*/
+    top:50%;
+    left:50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.btn-ripple:active:before {
+    animation: animate 1s linear infinite;
+}
+
+@keyframes animate{
+    0%
+    {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+    100%
+    {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}

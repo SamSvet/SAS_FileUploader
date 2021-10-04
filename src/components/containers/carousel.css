@@ -1,0 +1,157 @@
+.btn-outline-none{
+    outline: none;
+}
+.btn-outline-none:active:focus{
+    outline: none;
+}
+.icon-dark {
+    opacity: 0.5;
+    filter: invert(1) grayscale(100)
+}
+
+.icon-dark:hover {
+    opacity: 1;
+    outline: none;
+}
+
+.carousel-pages {
+    box-sizing: content-box;
+    /*flex: 0 1 auto;*/
+    width: 30px;
+    height: 3px;
+    padding: 0;
+    margin-right: 3px;
+    margin-left: 3px;
+    /*text-indent: -999px;*/
+    cursor: pointer;
+    background-color: #212529;
+    background-clip: padding-box;
+    border: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: 0.3;
+    transition: opacity .6s ease;
+    outline: none;
+}
+
+.carousel-pages.active{
+    opacity: 1;
+}
+
+.slide{
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    z-index: -1;
+    transition: 1s ease;
+    /*transform: scale(0);*/
+    overflow: hidden;
+    /*position: absolute;*/
+}
+.slide.active{
+    opacity: 1;
+    transition-duration: 1s;
+    /*transform: scale(1);*/
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: visible;
+}
+
+
+.slider {
+    position: relative;
+    display: flex;
+    /*height: 100%;*/
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-item{
+    width: 1000px;
+    height: 600px;
+}
+.slider-arrow{
+    position: absolute;
+    top: 50%;
+    padding: 0;
+    z-index: 0;
+}
+.slider-arrow:focus{
+    outline: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.no-outline:focus{
+    outline: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+.slider-arrow.left{
+    left: 20px;
+    transform: rotate(180deg);
+}
+.slider-arrow.right{
+    right: 20px;
+    float: right !important;
+}
+.button-chevron{
+    opacity: 0.5;
+}
+.button-chevron:hover{
+    opacity:1;
+}
+.slider-chevron{
+    width: 2rem;
+    height: 2.5rem;
+    display: block;
+    /* vertical-align: middle; */
+}
+
+@keyframes ripple {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+@keyframes animate{
+    0%
+    {
+        width: 0;
+        height: 0;
+    }
+    100%
+    {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@keyframes tonext {
+    0% {
+        transform: translateX(0);
+    }
+
+    30% {
+        opacity: .7;
+        transform: translateX(30px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+}
+
+.check-exit-active {
+    animation: check 700ms ease-out forwards;
+}
+
+.check-enter-active {
+    animation: check 700ms ease-in alternate-reverse;
+}

@@ -1,0 +1,50 @@
+{
+  "name": "sas-file-uploader",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "bootstrap": "^5.0.2",
+    "h54s": "^2.2.3",
+    "moment": "^2.29.1",
+    "papaparse": "^5.3.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.6.1",
+    "react-data-grid": "^7.0.0-beta.0",
+    "react-datetime": "^3.0.4",
+    "react-dom": "^17.0.2",
+    "react-joyride": "^2.3.1",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "react-transition-group": "^4.4.2",
+    "toastr": "^2.1.4",
+    "web-vitals": "^1.1.2",
+    "xlsx": "^0.17.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

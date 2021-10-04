@@ -1,0 +1,45 @@
+.intermediate_result-enter {
+    opacity: 0.01;
+}
+
+.intermediate_result-enter-active {
+    opacity: 0.01;
+}
+
+.intermediate_result-enter-done {
+    opacity: 1;
+    transition: opacity 1000ms linear;
+}
+
+.intermediate_result-exit{
+    opacity: 1;
+}
+
+.intermediate_result-exit-active{
+     opacity: 0.01;
+     transition: opacity 1000ms linear;
+}
+
+/*@keyframes intermediate_result {
+    0% {
+        transform: translateX(0);
+    }
+
+    30% {
+        opacity: .7;
+        transform: translateX(30px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+}
+
+.intermediate_result-exit-active {
+    animation: check 700ms ease-out forwards;
+}
+
+.intermediate_result-enter-active {
+    animation: check 700ms ease-in alternate-reverse;
+}*/

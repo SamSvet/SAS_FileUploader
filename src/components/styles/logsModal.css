@@ -1,0 +1,26 @@
+/* Inactive tab */
+/*.logsTabs {*/
+/*    background-color: orange;*/
+/*}*/
+
+.logsTabs ul > li > a {
+    background-color: white;
+    color: red;
+}
+.logsTabs ul > li > a:hover {
+    background-color: pink;
+}
+
+/* Active tab */
+.logsTabs ul > li.active > a,
+.logsTabs ul > li.active > a:hover,
+.logsTabs ul > li.active > a:focus {
+    background-color: red;
+    color: white;
+}
+
+/* Disabled tab */
+.logsTabs ul > li.disabled > a {
+    background-color: lightgray;
+    color: darkgray;
+}
