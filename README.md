@@ -1,3 +1,6 @@
+# SAS FileUplaoder
+This is a prototype of what a [SAS® Intelligence Platorm™](http://www.sas.com/en_us/software/sas9.html) Web Application might look like to load data into an internal data model.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,11 +1,9 @@
-import extListValidate from "../process/ExtList/extListValidate"
+import validateProcess from "../process/validateProcess"
 import fileValidateInfo from "../selectFile/fileValidateInfo"
-import mmbValidate from "../process/MMB/mmbValidate"
 
 export default function validateInfo(values) {
     return {
-        ...extListValidate(values),
-        ...mmbValidate(values),
+        ...validateProcess(values),
         ...fileValidateInfo(values)
     }
 }

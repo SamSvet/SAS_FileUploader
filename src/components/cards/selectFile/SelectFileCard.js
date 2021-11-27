@@ -9,21 +9,25 @@ import "./selectFile.css"
 import {useData} from "../../../context/DataContext"
 import {parseXlsx} from "./parseXlsx"
 import {DataGridPreview} from "./DataGridPreview"
+import {Carousel} from "../../containers/Carousel"
 
 export const SelectFileCard = () => {
-    const {errors} = useData()
+    const {errors, setErrorValues} = useData()
     const textInput = useRef(null)
     const contentRef = useRef(null)
+    const carouselRef = useRef(null)
     const [active, setActive] = useState(false)
     const [highlighted, setHighlighted] = useState(false)
     const {localData, handleChangeSelect} = useForm()
-    const defaultParse = {data:[], meta:{fields:[]}, size:0, name:""}
+    const defaultSheetData = {data:[], meta:{fields:[]}}
+    const defaultFileData = {size:0, name:""}
 
     useEffect(() => {
         contentRef.current.style.maxHeight = active ? `${contentRef.current.scrollHeight}px` : '0px'
     }, [active])
 
     const processFiles = (files, name) => {
+        setErrorValues(() => {})
         Array.from(files)
             .forEach(async (file) => {
                 switch (file.type){
@@ -32,11 +36,11 @@ export const SelectFileCard = () => {
                     case "text/plain":
                         const text = await file.text()
                         const csvResult = parse(text, {preview : 10, header: true})
-                        handleChangeSelect({ ...csvResult, myfile:file}, name)
+                        handleChangeSelect({ sheet:[{...csvResult, index: 0}], myfile:file}, name)
                         break
                     case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
                         const xlsResult = await parseXlsx(file)
-                        handleChangeSelect({ ...xlsResult, myfile:file}, name)
+                        handleChangeSelect({ sheet:xlsResult, myfile:file}, name)
                         break
                     default:
                 }
@@ -76,7 +80,7 @@ export const SelectFileCard = () => {
                         </button>
                         <input name={"fileInput"} type="file" className="inputfile inputfile-5" ref={textInput}
                                accept=".csv, .txt, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                               onChange={inputHandler}
+                               onChange={inputHandler} onClick={e => e.target.value=""}
                         />
                     </div>
                     <div className={'col-6'}><span >{`${Object.keys(localData).length ? localData.fileInput.myfile.name : ""}`}</span></div>
@@ -94,7 +98,14 @@ export const SelectFileCard = () => {
                 </div>
             </CardHeaderContainer>
             <CardBodyContainer ref={contentRef}>
-                <DataGridPreview fileData={localData.fileInput || defaultParse} />
+                {
+                    localData.fileInput && localData.fileInput.sheet && localData.fileInput.myfile && localData.fileInput.sheet.length>1
+                        ?
+                        <Carousel maxHeight={500} ref={carouselRef} fluid={true}>
+                            {localData.fileInput.sheet.map( sheet => <DataGridPreview key={sheet.meta.sheetName} sheetData={sheet} fileData={localData.fileInput.myfile}/>)}
+                        </Carousel>
+                        : <DataGridPreview sheetData={localData.fileInput ? localData.fileInput.sheet[0] : defaultSheetData} fileData={localData.fileInput ? localData.fileInput.myfile : defaultFileData}/>
+                }
             </CardBodyContainer>
         </CardContainer>
     )

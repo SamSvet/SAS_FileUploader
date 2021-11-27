@@ -5,17 +5,18 @@ import {customStyles, errorStyles} from "../../DarkSelectStyle"
 import {CardHeaderContainer} from "../../containers/CardHeaderContainer"
 import Chevron from "../../Chevron"
 import {CardBodyContainer} from "../../containers/CardBodyContainer"
-import {MMBProcess} from "./MMB/MMBProcess"
 import "../../styles/chevron.css"
 import {useData} from "../../../context/DataContext"
 import useForm from "../../../hooks/useForm"
-import {ExtListProcess} from "./ExtList/ExtListProcess"
 import "../../styles/tooltip.css"
 import {sasContext} from "../../../context/adapterSAS/sasContext"
+import {DefaultProcess} from "./DefaultProcess"
+import {localShoesOptions} from "./shoes/localOptions"
+import {localClassOptions} from "./class/localOptions"
 
 export const FileParamsCard = () => {
     const {handleChangeSelect} = useForm()
-    const {errors, sasData} = useData()
+    const {errors, sasData, setErrorValues} = useData()
     const contentRef = useRef(null)
     const [channel, setChannel] = useState({VALUE:null, LABEL: ''})
     const [active, setActive] = useState(false)
@@ -27,14 +28,15 @@ export const FileParamsCard = () => {
     }, [scrollHeight, active])
 
     const options = sasData.fileParamsType ? sasData.fileParamsType : [
-        { VALUE: 'import_ext_lists', LABEL: 'Process 1', TARGET_TABLE: 'target_table1', COLUMNS: "id,fullname,birthdate,sex"},
-        // { VALUE: 'import_ext_lists_MMB', LABEL: 'Process 2', TARGET_TABLE: 'target_table2', COLUMNS: "id1,fullname1,birthdate1,sex1" }
+        { VALUE: 'sashelp_shoes', LABEL: 'shoes list', TARGET_TABLE: 'sashelp.shoes', COLUMNS: "Region,Product,Subsidiary,Stores,Sales,Inventory,Returns"},
+        { VALUE: 'sashelp_class', LABEL: 'class list', TARGET_TABLE: 'sashelp.class', COLUMNS: "Age,Height,Name,Sex,Weight" }
     ]
 
     const selectChange = (e) => {
         setActive((prev) => true)
         setChannel(e)
         handleChangeSelect([e], "fileParamsType")
+        setErrorValues(() => {})
     }
 
     return (
@@ -45,8 +47,8 @@ export const FileParamsCard = () => {
                     <div className={'col-5'}>
                         <Select
                         menuPortalTarget={document.querySelector("body")}
-                        value={"Process"}
-                        placeholder={"Process"}
+                        value={"Процесс"}
+                        placeholder={"Процесс"}
                         onChange={selectChange}
                         className={'float-start'}
                         options={options}
@@ -57,7 +59,7 @@ export const FileParamsCard = () => {
                         components={{
                             DropdownIndicator:() => null,
                             IndicatorSeparator:() => null,
-                            Placeholder:() => loading ? <>Process...<span className={"spinner-border spinner-border-sm"} role={'status'} aria-hidden={'true'}/></> : 'Process'}}/>
+                            Placeholder:() => loading ? <>Процесс...<span className={"spinner-border spinner-border-sm"} role={'status'} aria-hidden={'true'}/></> : 'Process'}}/>
                     </div>
                     <div className={'col-6'}><span >{channel.LABEL}</span></div>
                     <div className={'col-1'}>
@@ -74,8 +76,18 @@ export const FileParamsCard = () => {
 
             </CardHeaderContainer>
             <CardBodyContainer ref={contentRef} >
-                <ExtListProcess channel={channel}/>
-                <MMBProcess channel={channel}/>
+                <DefaultProcess
+                    userProcess={channel}
+                    currentProcess='sashelp_shoes'
+                    combineFunction={(res) => [{LABEL:'Base checks', options:res.selectCheckList}, {LABEL:'Customm checks', options:res.selectStpList}]}
+                    defaultOptions={localShoesOptions}
+                />
+                <DefaultProcess
+                    userProcess={channel}
+                    currentProcess='sashelp_class'
+                    combineFunction={(res) => [{LABEL:'Base checks', options:res.selectCheckList}, {LABEL:'Customm checks', options:res.selectStpList}]}
+                    defaultOptions={localClassOptions}
+                />
             </CardBodyContainer>
         </CardContainer>
     )

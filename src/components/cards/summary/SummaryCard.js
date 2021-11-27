@@ -14,7 +14,7 @@ export const SummaryCard = () => {
     const {state, callSAS} = useContext(sasContext)
 
     const handleClickGet = (e) => {
-        const sasResponse = callSAS('/Apps/SASUploader/startupService', null)
+       const sasResponse = callSAS('/Apps/SASUploader/startupService', null)
         console.log(sasResponse)
     }
     const handleClickSend = (e) => {
@@ -77,12 +77,21 @@ export const SummaryCard = () => {
                         }
                         {
                             fileInput &&
-                            <tr>
-                                <td>File</td>
-                                <td><small>{fileInput.myfile.name} - </small><small>{fileInput.myfile.size}</small></td>
-                            </tr>
+                            <>
+                                <tr>
+                                    <td>File</td>
+                                    <td><small>{fileInput.myfile.name} - </small><small>{fileInput.myfile.size}</small></td>
+                                </tr>
+                                <tr>
+                                <td>fileInput</td>
+                                <td>{JSON.stringify(fileInput)}</td>
+                                </tr>
+                                <tr>
+                                    <td>fileInput.myfile</td>
+                                    <td>{JSON.stringify(fileInput.myfile)}</td>
+                                </tr>
+                            </>
                         }
-
                         </tbody>
                     </table>
                 </CardBodyContainer>
@@ -90,16 +99,4 @@ export const SummaryCard = () => {
             </div>
         </CardContainer>
     )
-
-    // function mapDispatchToProps(dispatch) {
-    //     return {
-    //         call: async (program) => {
-    //             let callData = await adapterService.call(dispatch, program, null)
-    //             if (typeof callData === "string"){
-    //                 callData = JSON.parse(callData)
-    //             }
-    //             return callData
-    //         }
-    //     }
-    // }
 }

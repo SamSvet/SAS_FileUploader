@@ -12,10 +12,7 @@ import {Ripple} from "../../containers/Ripple"
 
 
 export const SummarySASCard = () => {
-    const finalDataInitial = useMemo(() => {
-        return {data:[], result:[]}
-        }, [])
-
+    const finalDataInitial = useMemo(() => {}, [])
     const {data, errors, setErrorValues, setSasValues} = useData()
     const {fileInput} = data
     const {loading,  callSAS} = useContext(sasContext)
@@ -29,21 +26,29 @@ export const SummarySASCard = () => {
             .catch(err => { console.log(err) })
     }, [])
 
+    const groupByKey = (arr, key) => {
+        return arr.reduce(function(acc, cur){
+            if (cur[key] in acc){
+                return {...acc, [cur[key]]:[...acc[cur[key]], cur]}
+            }
+            return {...acc, [cur[key]]:[cur]}
+        }, {})
+    }
+
     const loadingClick2 = () => {
         const sasTable = new H54s.SasData(data.selectChecks && data.selectChecks.length ? data.selectChecks : [{VALUE:'', LABEL:''}], 'selectChecks')
         if (fileInput) {
             sasTable.addFile(fileInput.myfile, 'myFile')
-            if (fileInput.data.length){
-                sasTable.addTable([{
-                    delimiter: fileInput.meta.delimiter ? JSON.stringify(fileInput.meta.delimiter) : '',
-                    linebreak: fileInput.meta.linebreak ? JSON.stringify(fileInput.meta.linebreak) : '',
-                    targetTable: data.fileParamsType[0].TARGET_TABLE,
-                    fields: fileInput.meta.fields.join(' ')
-                }], 'meta')
-            }
+            sasTable.addTable(fileInput.sheet.map(el => ({
+                fields:el.meta.fields.join(' '),
+                delimiter: el.meta.delimiter ? JSON.stringify(fileInput.sheet[0].meta.delimiter) : '',
+                linebreak: el.meta.linebreak ? JSON.stringify(fileInput.sheet[0].meta.linebreak) : '',
+                sheetName: el.meta.sheetName ? el.meta.sheetName : ''
+            })),'meta')
+            sasTable.addTable([{process_cd: data.fileParamsType[0].VALUE}], 'process')
         }
-        callSAS('/Apps/SASUploader/checkData', sasTable)
-            .then(result => { setSasIntermediate(result) })
+        callSAS(`${data.fileParamsType[0].CHECK_STP}`, sasTable)
+            .then(sasResponse => { setSasIntermediate({...sasResponse, data:groupByKey(sasResponse.data, 'SUBGROUP')}) })
             .catch(err => { console.log(err) })
     }
 
@@ -59,18 +64,6 @@ export const SummarySASCard = () => {
         setSasFinalData((prev) => finalDataInitial)
     }, [data, finalDataInitial])
 
-    // const loadingClick = (event) => {
-    //     setDisabled((prevState) => true)
-    //     callSAS('/Apps/SASUploader/sendData', [])
-    //         .then((result) => {
-    //             console.log(result)
-    //         })
-    //         .catch((reason) => {
-    //             toastr.error('Unable to request /Apps/SASUploader/sendData')
-    //         })
-    //     setTimeout(() => {setDisabled((prevState) => false)}, 3000)
-    // }
-
     const intermediateCallBack = (finalRes, intermediateRes=null) => {
         if (intermediateRes) setSasIntermediate(intermediateRes)
         setSasFinalData(finalRes)
@@ -81,7 +74,6 @@ export const SummarySASCard = () => {
         setSasFinalData((prev) => finalDataInitial)
         setErrorValues(validateInfo)
         setDisabled((prevState) => true)
-        /*setTimeout(() => setSasIntermediate({data:[{RC: 0, DESC: "Success", CNT: 123}, {RC:1, DESC: 'Error', CNT: 456}, {RC:-1, DESC: "Warning", CNT: 678}], result:[{}]}), 3000)*/
     }
 
     return (
@@ -95,7 +87,7 @@ export const SummarySASCard = () => {
                             loading={loading}
                             onClick={loadingClick3}
                         >
-                            Check this file
+                            Call SAS to check
                             <Ripple duration={2000} backgroundColor={"#212529"} />
                         </LoadingButton>
                     </div>

@@ -1,7 +1,7 @@
-export default function extListValidate(values) {
+export default function validateProcess(values) {
     let errors = {}
     if (!("fileParamsType" in values)){ return {fileParamsType: {errDesc:"Select process"}}}
-    if ( values.fileParamsType[0].VALUE !== 'import_ext_lists' ) return {}
+    // if ( values.fileParamsType[0].VALUE !== 'sashelp_cars' ) return {}
     if (!("selectChecks" in values)){
         errors.selectChecks = {errDesc:"Select checks"}
     }
