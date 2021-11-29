@@ -18,7 +18,7 @@ The list of available processes is passed to the client side by SAS STP */Apps/S
 <img src="https://user-images.githubusercontent.com/64905854/143759759-4157df11-214f-450b-a922-2f6d1c82c76a.gif">
 </p>
 
-3. By the clicking **Call SAS to check** button initiated request to the SAS STP */Apps/SASUploader/checkData* which is responsible for a file validation against the conditions set up on the previous step. */Apps/SASUploader/checkData* produces response back to the client side where the user can view (*/Apps/SASUploader/downloadService* is responsible for downloading data from SAS) the details of the checks performed.
+3. By the clicking **Call SAS to check** button initiated request to the SAS STP */Apps/SASUploader/checkData* which is responsible for a file validation against the conditions set up on the previous step. */Apps/SASUploader/checkData* produces response back to the client side where the user can view ([*/Apps/SASUploader/downloadService*](sas/Apps/SASUploader/downloadService) is responsible for downloading data from SAS) the details of the checks performed.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/64905854/143763731-0e492438-f434-4859-a131-f3a63655f828.gif">
 </p>
