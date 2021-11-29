@@ -47,8 +47,8 @@ export const FileParamsCard = () => {
                     <div className={'col-5'}>
                         <Select
                         menuPortalTarget={document.querySelector("body")}
-                        value={"Процесс"}
-                        placeholder={"Процесс"}
+                        value={"Process"}
+                        placeholder={"Process"}
                         onChange={selectChange}
                         className={'float-start'}
                         options={options}
@@ -59,7 +59,7 @@ export const FileParamsCard = () => {
                         components={{
                             DropdownIndicator:() => null,
                             IndicatorSeparator:() => null,
-                            Placeholder:() => loading ? <>Процесс...<span className={"spinner-border spinner-border-sm"} role={'status'} aria-hidden={'true'}/></> : 'Process'}}/>
+                            Placeholder:() => loading ? <>Process...<span className={"spinner-border spinner-border-sm"} role={'status'} aria-hidden={'true'}/></> : 'Process'}}/>
                     </div>
                     <div className={'col-6'}><span >{channel.LABEL}</span></div>
                     <div className={'col-1'}>

@@ -1,7 +1,7 @@
 # SAS FileUploader
 
 ## Overview
-This is [React](https://reactjs.org/) Web Application for [SAS® Intelligence Platorm™](http://www.sas.com/en_us/software/sas9.html) that uses [H54S](https://github.com/Boemska/h54s) adapter for bi-directional communication between JavaScript front-end and SAS back-end services. The app allows users to upload CSV and excel files to the SAS internal data model.
+This is [React](https://reactjs.org/) Web Application for [SAS® Intelligence Platorm™](http://www.sas.com/en_us/software/sas9.html) that uses [H54S](https://github.com/Boemska/h54s) adapter for bi-directional communication between JavaScript front-end and SAS back-end services. The application allows to upload CSV and excel files into SAS while performing a set of checks on uploaded data.
 
 ## How to use it
 
@@ -28,7 +28,7 @@ The list of available processes is passed to the client side by SAS STP */Apps/S
 <img src="https://user-images.githubusercontent.com/64905854/143763748-d0395893-77a1-4418-914b-d7a5e79e965e.gif">
 </p>
 
-When **Debug** mode is ON you can view logs of the requested SAS STP's.
+When **Debug** mode is ON you can view **Logs** of the requested SAS STP's.
 
 # Getting Started with Create React App
 
