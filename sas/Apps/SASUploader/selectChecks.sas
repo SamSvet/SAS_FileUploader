@@ -56,8 +56,6 @@ data selectCheckList;
 set allChecks(where=(process_cd="&PROCESS_CD"));
 run;
 
- 
-
 %bafheader;
     %bafOutDataset(selectCheckList, work, selectCheckList);
     %let time=%sysevalf(%sysfunc(datetime()) - &start );

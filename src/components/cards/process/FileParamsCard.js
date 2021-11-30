@@ -79,13 +79,13 @@ export const FileParamsCard = () => {
                 <DefaultProcess
                     userProcess={channel}
                     currentProcess='sashelp_shoes'
-                    combineFunction={(res) => [{LABEL:'Base checks', options:res.selectCheckList}, {LABEL:'Customm checks', options:res.selectStpList}]}
+                    combineFunction={(res) => [{LABEL:'Optional checks', options:res.selectCheckList}]}
                     defaultOptions={localShoesOptions}
                 />
                 <DefaultProcess
                     userProcess={channel}
                     currentProcess='sashelp_class'
-                    combineFunction={(res) => [{LABEL:'Base checks', options:res.selectCheckList}, {LABEL:'Customm checks', options:res.selectStpList}]}
+                    combineFunction={(res) => [{LABEL:'Optional checks', options:res.selectCheckList}]}
                     defaultOptions={localClassOptions}
                 />
             </CardBodyContainer>
