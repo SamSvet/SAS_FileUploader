@@ -13,7 +13,7 @@ The list of available processes is passed to the client side by SAS STP */Apps/S
 <img src="https://user-images.githubusercontent.com/64905854/143756620-01f531d3-9046-4ad7-a23c-b294fba41d6f.gif">
 </p>
 
-2. At the **Process** section user is able to select conditions that the file choosen at the **File** section must satisfy. The first time a process is selected, the request to the SAS STP */Apps/SASUploader/selectChecks* is sent, which then returns checks related to the given process. 
+2. At the **Process** section user is able to select conditions that the file choosen at the **File** section must satisfy. The first time a process is selected, the request to the SAS STP ([*/Apps/SASUploader/selectChecks*](sas/Apps/SASUploader/selectChecks.sas) is sent, which then returns checks related to the given process. 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/64905854/143759759-4157df11-214f-450b-a922-2f6d1c82c76a.gif">
 </p>
