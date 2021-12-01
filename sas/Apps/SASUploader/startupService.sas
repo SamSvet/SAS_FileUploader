@@ -10,24 +10,16 @@ options mprint mlogic nosyntaxcheck nostsuffix MAUTOSOURCE;
 %mend;
 %append_sasautos(&commonMacroPath);
 
+%generate_process;
 /*Process list for demo*/
-data fileParamsType;
-attrib
-    value             length=$16
-    label             length=$32
-    target_table      length=$32
-    target_table_dyn  length=$32
-    columns           length=$1024
-    columns_dyn       length=$1024
-    check_stp         length=$256
-    load_stp          length=$256
-    select_checks_stp length=$256
-;
-check_stp='/Apps/SASUploader/checkData';load_stp='/Apps/SASUploader/loadData';select_checks_stp='/Apps/SASUploader/selectChecks';
-value='sashelp_shoes';label='shoes list';target_table='SASHELP.SHOES';columns="%varlist(SASHELP.SHOES, dlm=%str(,))";
-output;
-value='sashelp_class';label='class list';target_table='SASHELP.CLASS';columns="%varlist(SASHELP.CLASS, dlm=%str(,))";
-output;
+data fileParamsType(drop=rc);
+length columns $1024;
+set process(
+     keep=check_stp load_stp select_checks_stp process_name process_cd target_table
+     rename=(process_name=label process_cd=value)
+);
+rc=dosubl('%let col=%varlist('||target_table||', dlm=%str(,));');
+columns=symget('col');
 run;
 
 %bafheader;
