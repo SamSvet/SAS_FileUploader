@@ -10,11 +10,11 @@ options mprint mlogic nosyntaxcheck nostsuffix MAUTOSOURCE;
 %mend;
 %append_sasautos(&commonMacroPath);
 
-%generate_process;
+%generate_target;
 /*Process list for demo*/
 data fileParamsType(drop=rc);
 length columns $1024;
-set process(
+set target(
      keep=check_stp load_stp select_checks_stp process_name process_cd target_table
      rename=(process_name=label process_cd=value)
 );

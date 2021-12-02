@@ -1,5 +1,5 @@
-%macro generate_process;
-data process;
+%macro generate_target;
+data target;
 attrib
      process_cd        length=$16
      process_name      length=$128

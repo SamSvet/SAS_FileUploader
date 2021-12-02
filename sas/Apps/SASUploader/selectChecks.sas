@@ -10,8 +10,7 @@ options mprint mlogic nosyntaxcheck nostsuffix MAUTOSOURCE;
 %mend;
 %append_sasautos(&commonMacroPath);
 
-
-%bafGetDatasets;/*here comes inputdata*/
+%bafGetDatasets;/*here comes inputdata dataset*/
 resetline;
 
 data _null_;
@@ -19,42 +18,29 @@ set inputdata(obs=1);
 call symputx('PROCESS_CD', PROCESS_CD);
 run;
 
+%generate_rule_column;
+proc sort data=rule_column;by rule_num;run;
+data col(drop=rule_column);
+set rule_column; by rule_num;
+length columns $1024;
+retain columns;
+if first.rule_num then call missing(columns);
+columns=catx(',', columns, rule_column);
+if last.rule_num then output;
+run;
  
-/*all checks for demo*/
-data allChecks;
-attrib
-    process_cd length=$16
-    num        length=8
-    isfixed    length=3
-    columns    length=$1024
-    label      length=$32
-    value      length=$1024
-;
-process_cd='sashelp_shoes';
-num=1; isfixed=1; columns='Product'; label=columns; value='Product - value should be in ("Boot", "Sandal", "Slipper")';
-output;
-num=2; columns='Stores'; label=columns;  value='Stores - Stores>=1 and Stores<=100';
-output;
-num=3; isfixed=0; columns='Region'; label=columns; value='Region - value should be in ("Africa", "Western Europe", "Pacific")';
-output;
-num=4; columns='Returns'; label=columns; value='Returns - Returns>=100.0 and Returns<=10000.0';
-output;
-process_cd='sashelp_class';
-num=5; isfixed=1; columns='Sex'; label=columns; value='Sex - value should be in ("M", "F")';
-output;
-num=6; columns='Age'; label=columns;  value='Age - Age>=10 and Age<=16';
-output;
-num=7; isfixed=0; columns='Height'; label=columns; value='Height - Height>=50.0 and Height<=70.0';
-output;
-num=8; columns='Weight'; label=columns; value='Weight - Weight>=80.0 and Weight<=120.0';
-output;
-num=9; columns='Name'; label=columns; value='Name - Name="Sam"';
-output;
-run;
-
-data selectCheckList;
-set allChecks(where=(process_cd="&PROCESS_CD"));
-run;
+%generate_target;
+%generate_condition;
+%generate_process_rule;
+proc sql noprint;
+create table selectCheckList as
+select p.process_cd, r.rule_num as num, r.isfixed, col.columns, c.label, c.value
+from target as p
+inner join process_rule r on p.process_cd=r.process_cd
+inner join col on col.rule_num=r.rule_num
+inner join condition c on c.rule_num=r.rule_num
+where p.process_cd="&PROCESS_CD";
+quit; 
 
 %bafheader;
     %bafOutDataset(selectCheckList, work, selectCheckList);
