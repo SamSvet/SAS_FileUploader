@@ -28,10 +28,10 @@ run;
     %initialState;
     %if &_RC_ %then %goto exit;
 
-    %readFile(userData);
+    %read_file(userData);
     %if &_RC_ %then %goto exit;
 
-    %verifyFile(userData, &tempData, program_data, program_result, &targetTable);
+    %verify_file(userData, &tempData, program_data, program_result, &targetTable);
     %if &_RC_ %then %goto exit;
 %exit:
     %if &_RC_ %then %do;

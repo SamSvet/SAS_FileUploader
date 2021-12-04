@@ -18,12 +18,12 @@ The list of available processes is passed to the client side by SAS STP [*/Apps/
 <img src="https://user-images.githubusercontent.com/64905854/143759759-4157df11-214f-450b-a922-2f6d1c82c76a.gif">
 </p>
 
-3. By the clicking **Call SAS to check** button initiated request to the SAS STP */Apps/SASUploader/checkData* which is responsible for a file validation against the conditions set up on the previous step. */Apps/SASUploader/checkData* produces response back to the client side where the user can view ([*/Apps/SASUploader/downloadService*](sas/Apps/SASUploader/downloadService.sas) is responsible for downloading data from SAS) the details of the checks performed.
+3. By the clicking **Call SAS to check** button initiated request to the SAS STP [*/Apps/SASUploader/checkData*](sas//Apps/SASUploader/checkData.sas) which is responsible for a file validation against the conditions set up on the previous step. */Apps/SASUploader/checkData* produces response back to the client side where the user can view ([*/Apps/SASUploader/downloadService*](sas/Apps/SASUploader/downloadService.sas) is responsible for downloading data from SAS) the details of the checks performed.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/64905854/143763731-0e492438-f434-4859-a131-f3a63655f828.gif">
 </p>
 
-4. If the number of rows passed the check meets the expected level then user sends a request to SAS STP */Apps/SASUploader/loadData* by clicking on the **Upload to SAS** button. Success rows, session and user metadata will be saved to the internal SAS data model.
+4. If the number of rows passed the check meets the expected level then user sends a request to SAS STP [*/Apps/SASUploader/loadData*](sas/Apps/SASUploader/loadData.sas) by clicking on the **Upload to SAS** button. Success rows, session and user metadata will be saved to the internal SAS data model.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/64905854/143763748-d0395893-77a1-4418-914b-d7a5e79e965e.gif">
 </p>
