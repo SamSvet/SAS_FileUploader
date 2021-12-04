@@ -44,6 +44,10 @@ rule_description='catx(byte(10), &mvFlagName, "Error:Weight should be between 80
 rule_num=9; rule_value='9'; label='Name'; value='Name - Name="Sam"';
 rule_condition='Name ne "Sam"';
 rule_description='catx(byte(10), &mvFlagName, "Error:Name should be `Sam`")';output;
+
+rule_num=100; rule_value='100'; call missing(label, value);
+rule_condition='max(of &mvFlagName{*})<-1';
+rule_description='"Success:Valid row"'; output;
 run;
 
 %mend;
