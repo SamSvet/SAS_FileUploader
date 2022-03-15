@@ -13,7 +13,7 @@
     %if %sysfunc(libref(TMP)) %then %do;
         %seterr(Could not assign TMP library);
         %return;
-     %end;
+    %end;
 
     %let tempData=TMP.FILEUPLOADER_%sysfunc(round(%sysfunc(datetime())));
     data program_data;

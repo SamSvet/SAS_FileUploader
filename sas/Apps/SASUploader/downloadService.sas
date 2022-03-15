@@ -12,6 +12,17 @@ options mprint mlogic symbolgen fullstimer;
 %macro getExtListData(mvtable=, mvtype=);
      %let start=%sysfunc(datetime());
      
+     data _null_;
+     set sashelp.vmember(where=(libname='SASUSER') obs=1);
+     last_slash=length(path)-length(scan(path,-1, '/'));
+     call symputx('tmppath', substr(path, 1, last_slash));
+     run;
+     libname TMP "&tmppath";
+     %if %sysfunc(libref(TMP)) %then %do;
+          %seterr(Could not assign TMP library);
+          %return;
+     %end;
+
      %let filename=%sysfunc(pathname(WORK))/%nrstr(&)mvtable..xlsx;
 
      %if &mvtype >= 1 %then %do;

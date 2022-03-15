@@ -18,7 +18,7 @@ The list of available processes is passed to the client side by SAS STP [*/Apps/
 <img src="https://user-images.githubusercontent.com/64905854/143759759-4157df11-214f-450b-a922-2f6d1c82c76a.gif">
 </p>
 
-3. By the clicking **Call SAS to check** button initiated request to the SAS STP [*/Apps/SASUploader/checkData*](sas//Apps/SASUploader/checkData.sas) which is responsible for a file validation against the conditions set up on the previous step. */Apps/SASUploader/checkData* produces response back to the client side where the user can view ([*/Apps/SASUploader/downloadService*](sas/Apps/SASUploader/downloadService.sas) is responsible for downloading data from SAS) the details of the checks performed.
+3. By the clicking **Call SAS to check** button initiated request to the SAS STP [*/Apps/SASUploader/checkData*](sas/Apps/SASUploader/checkData.sas) which is responsible for a file validation against the conditions set up on the previous step. */Apps/SASUploader/checkData* produces response back to the client side where the user can view ([*/Apps/SASUploader/downloadService*](sas/Apps/SASUploader/downloadService.sas) is responsible for downloading data from SAS) the details of the checks performed.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/64905854/143763731-0e492438-f434-4859-a131-f3a63655f828.gif">
 </p>
@@ -29,6 +29,24 @@ The list of available processes is passed to the client side by SAS STP [*/Apps/
 </p>
 
 When **Debug** mode is ON you can view **Logs** of the requested SAS STP's.
+
+## Deploy
+
+The process of deploying app consist of:
+- Copy and paste `/sas/automacro` macros to your sas-compute server 
+- Get the H54S adapter and locate it somewhere on your sas-compute server
+- Create 5 SAS STP services based on code under `sas/Apps/SASUploader`
+- Deploy the Web App by copying the `dist` directory to somewhere within `Lev1/Web/WebServer/htdocs`
+More details about each step below.
+
+### Deploy SAS back-end
+
+Copy [*/sas/automacro*](/sas/automacro) macros to sas-compute server(e.g. SASApp). Note that all macros are located in the file of the same lowercase name.
+Get the [*H54S*](https://github.com/Boemska/h54s/blob/master/sasautos/h54s.sas) adapter and just like automacros copy to sas-compute.
+
+
+##### Configure the H54S location 
+https://github.com/Boemska/h54s/blob/master/sasautos/h54s.sas
 
 # Getting Started with Create React App
 
